@@ -1,7 +1,8 @@
-package com.cxy.weberpby.service;
+package com.cxy.weberpby.service.impl;
 
 import com.cxy.weberpby.dao.CLZLDao;
 import com.cxy.weberpby.model.CLZL;
+import com.cxy.weberpby.service.CLZLService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +17,7 @@ import java.util.List;
  */
 
 @Component
-public class CLZLServiceImpl implements CLZLService{
+public class CLZLServiceImpl implements CLZLService {
 
     @Autowired
     private CLZLDao clzlDao;
