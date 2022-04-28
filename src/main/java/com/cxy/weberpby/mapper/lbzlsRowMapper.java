@@ -10,12 +10,11 @@ import java.sql.SQLException;
  * @author CXY
  * @version Create Time:2022年2月16日
  * @Description 代号类别明细资料 - 上一层是 lbzl
- *
  */
 
-public class lbzlsRowMapper implements RowMapper {
+public class lbzlsRowMapper implements RowMapper<lbzls> {
     @Override
-    public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
+    public lbzls mapRow(ResultSet rs, int rowNum) throws SQLException {
         lbzls lbzls = new lbzls();
         lbzls.setLb(rs.getString("lb"));
         lbzls.setLbdh(rs.getString("lbdh"));
