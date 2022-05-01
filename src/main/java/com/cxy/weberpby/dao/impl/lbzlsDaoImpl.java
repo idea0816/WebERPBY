@@ -22,11 +22,11 @@ import java.util.Map;
  * <p>
  * Integer checkBwlbzls(String BWBH);    // 检查部位类别明细资料是否存在
  * String lbzlsBwInsert();    // 写入部位类别明细资料
- * List<lbzls> getlbzlList();   // 取得類別資料
- * List<lbzls> getlbzlsList();  // 取得类别明细资料
+ * List<lbzls> getlbzlList();   // 取得类别lbzl資料
+ * List<lbzls> getlbzlsList();  // 取得类别明细lbzls明细资料
  * void insertlbzl(lbzl lbzl);   //新增lbzl資料
  * void updatelbzl(lbzl lbzl); //修改lbzl資料
- * public void deletelbzl(String lb);   // 刪除lbzl資料
+ * void deletelbzl(String lb);   // 刪除lbzl資料
  * void insertlbzls(lbzls lbzls);   //新增lbzls資料
  * void deletelbzls(String lb);   // 刪除lbzls資料
  */
@@ -69,10 +69,9 @@ public class lbzlsDaoImpl implements lbzlsDao {
         return null;
     }
 
-    // 取得類別資料
+    // 取得类别lbzl資料
     @Override
     public List<lbzl> getlbzlList() {
-//        lbzl 還沒改nvarchar
         String sqlgetlbzl = "SELECT lb, zwsm, ywsm, bz, USERID, USERDATE " +
                 "FROM lbzl ";
         map = new HashMap<>();
@@ -86,19 +85,19 @@ public class lbzlsDaoImpl implements lbzlsDao {
         }
     }
 
-    // 取得类别明细资料
+    // 取得类别明细lbzls资料
     @Override
     public List<lbzls> getlbzlsList(String lb) {
-        String sqllbzlsBwList = "SELECT lb, lbdh, zwsm, ywsm, bz, bz1, USERID, USERDATE " +
+        String sqllbzlsList = "SELECT lb, lbdh, zwsm, ywsm, bz, bz1, USERID, USERDATE " +
                 "FROM lbzls " +
                 "WHERE lb = :lb ";
         map = new HashMap<>();
         map.put("lb", lb);
 
-        List<lbzls> getlbzlsBwList = lbyddJdbcTemplate.query(sqllbzlsBwList, map, new lbzlsRowMapper());
+        List<lbzls> getlbzlsList = lbyddJdbcTemplate.query(sqllbzlsList, map, new lbzlsRowMapper());
 
-        if (getlbzlsBwList.size() > 0) {
-            return getlbzlsBwList;
+        if (getlbzlsList.size() > 0) {
+            return getlbzlsList;
         } else {
             return null;
         }
@@ -123,11 +122,14 @@ public class lbzlsDaoImpl implements lbzlsDao {
     //修改lbzl資料
     @Override
     public void updatelbzl(lbzl lbzl) {
-        String sqlupdatelbzl = "update lbzl set zwsm = :zwsm, bz= :bz, USERDATE = :USERDATE where lb = :lb";
+        String sqlupdatelbzl = "UPDATE lbzl " +
+                "SET zwsm = :zwsm, bz= :bz,USERID = :USERID, USERDATE = :USERDATE " +
+                "WHERE lb = :lb";
         map = new HashMap<>();
         map.put("lb", lbzl.getLb());
         map.put("zwsm", lbzl.getZwsm());
         map.put("bz", lbzl.getBz());
+        map.put("USERID", lbzl.getUSERID());
         map.put("USERDATE", lbzl.getUSERDATE());
 
         lbyddJdbcTemplate.update(sqlupdatelbzl, map);

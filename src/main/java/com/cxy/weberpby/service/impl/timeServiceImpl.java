@@ -25,21 +25,18 @@ public class timeServiceImpl implements timeService {
     // 現在年月日
     @Override
     public String now() {
-        String now = nowDate.format(dateFormat);
-        return now;
+        return nowDate.format(dateFormat);
     }
 
     // 現在年月
     @Override
     public String nowYM() {
-        String nowYM = nowDate.format(dateFormat).substring(0, 6);
-        return nowYM;
+        return nowDate.format(dateFormat).substring(0, 6);
     }
 
     // 現在年月 -1
     @Override
     public String lastNowYM() {
-        String lastNowYM = (nowDate.minusMonths(1)).format(dateFormat).substring(0, 6);
-        return lastNowYM;
+        return (nowDate.minusMonths(1)).format(dateFormat).substring(0, 6);
     }
 }

@@ -15,6 +15,8 @@ import java.util.List;
  * <p>
  * public List<lbzls> getlbzlsList(@PathVariable String lb) // 類別明細資料
  * public String updatelbzl(@RequestBody lbzlUpdateParams lup)  // Update lbzl & lbzls
+ * public String insertlbzl(@RequestBody lbzlUpdateParams lup)  // Insert lbzl & lbzls
+ * public String deletelbzl(@RequestBody String lb) // Delete lbzl & lbzls
  */
 
 @RestController

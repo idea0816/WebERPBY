@@ -46,12 +46,10 @@ public class lbzlsServiceImpl implements lbzlsService {
     // Update lbzl & lbzls
     @Override
     public void updatelbzl(lbzlUpdateParams lup) {
-        // 判斷新舊 lbzls
-
         // 判斷新舊 lbzl
         if (lup.getNewlbzl().get(0).getLb().equals(lup.getOldlbzl().get(0).getLb())) {
             // 檢查新舊 lbzl 內容
-            if (lup.getNewlbzl().get(0).getZwsm().equals(lup.getOldlbzl().get(0).getZwsm()) || lup.getNewlbzl().get(0).getBz().equals(lup.getOldlbzl().get(0).getBz())) {
+            if (lup.getNewlbzl().get(0).getZwsm().equals(lup.getOldlbzl().get(0).getZwsm()) && lup.getNewlbzl().get(0).getBz().equals(lup.getOldlbzl().get(0).getBz())) {
                 // do nothing
             } else {
                 // 改變中文說明 & 備註
@@ -59,6 +57,7 @@ public class lbzlsServiceImpl implements lbzlsService {
                 updatelbzl.setLb(lup.getNewlbzl().get(0).getLb());
                 updatelbzl.setZwsm(lup.getNewlbzl().get(0).getZwsm());
                 updatelbzl.setBz(lup.getNewlbzl().get(0).getBz());
+                updatelbzl.setUSERID("SUPER");
                 updatelbzl.setUSERDATE(timeService.now());
 
                 lbzlsDao.updatelbzl(updatelbzl);
@@ -76,23 +75,11 @@ public class lbzlsServiceImpl implements lbzlsService {
                 insertlbzls.setBz1(value.getBz1());
                 insertlbzls.setUSERID("SUPER");
                 insertlbzls.setUSERDATE(timeService.now());
+
                 lbzlsDao.insertlbzls(insertlbzls);
             }
-
         } else {
-            // 如果新類別編號改變、就直接新增後刪掉舊類別(含類別明細)
-            // Insert newlbzl
-            lbzl insertlbzl = new lbzl();
-            insertlbzl.setLb(lup.getNewlbzl().get(0).getLb());
-            insertlbzl.setZwsm(lup.getNewlbzl().get(0).getZwsm());
-            insertlbzl.setYwsm("");
-            insertlbzl.setBz(lup.getNewlbzl().get(0).getBz());
-            insertlbzl.setUSERID("SUPER");
-            insertlbzl.setUSERDATE(timeService.now());
-            lbzlsDao.insertlbzl(insertlbzl);
-            // Delete oldlbzl & old lbzls
-            lbzlsDao.deletelbzl(lup.getOldlbzl().get(0).getLb());
-            lbzlsDao.deletelbzls(lup.getOldlbzl().get(0).getLb());
+            // 如果類別編號改新、就直接新增後刪掉舊類別(含類別明細)
             // Insert lbzls
             for (lbzls value : lup.getNewlbzls()) {
                 lbzls insertlbzls = new lbzls();
@@ -103,8 +90,23 @@ public class lbzlsServiceImpl implements lbzlsService {
                 insertlbzls.setBz1(value.getBz1());
                 insertlbzls.setUSERID("SUPER");
                 insertlbzls.setUSERDATE(timeService.now());
+
                 lbzlsDao.insertlbzls(insertlbzls);
             }
+            // Insert newlbzl
+            lbzl insertlbzl = new lbzl();
+            insertlbzl.setLb(lup.getNewlbzl().get(0).getLb());
+            insertlbzl.setZwsm(lup.getNewlbzl().get(0).getZwsm());
+            insertlbzl.setYwsm("");
+            insertlbzl.setBz(lup.getNewlbzl().get(0).getBz());
+            insertlbzl.setUSERID("SUPER");
+            insertlbzl.setUSERDATE(timeService.now());
+
+            lbzlsDao.insertlbzl(insertlbzl);
+
+            // Delete oldlbzl & old lbzls
+            lbzlsDao.deletelbzl(lup.getOldlbzl().get(0).getLb());
+            lbzlsDao.deletelbzls(lup.getOldlbzl().get(0).getLb());
         }
     }
 
