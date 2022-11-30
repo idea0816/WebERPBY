@@ -1,0 +1,31 @@
+<body>
+    <!--
+        /**
+        * @author CXY
+        * @version Create Time:2022年5月3日
+        * @Description 模具明细资料
+        *
+        */
+    -->
+    <div class="loadContent">
+        <section class="first70">
+            <br>模具明细资料<br>
+            <table id="MJZLTable">
+                <tr>
+                    <th>模具编号</th>
+                    <th>类别</th>
+                </tr>
+                <tr th:each="getML: ${MLList}">
+                    <td th:text="${getML.getMjbh}">111</td>
+                    <td th:text="${getML.getLbdh}">111</td>
+                </tr>
+            </table>
+
+        </section>
+    </div>
+</body>
+<!-- 配合 Thymeleaf的寫法、從static位置後開始寫、連同靜態編輯一起引入 -->
+<script type="text/javascript" th:src="@{/js/jquery-3.6.0.min.js}" src="../static/js/jquery-3.6.0.min.js"></script>
+<script th:src="@{./js/MJZLList.js}" src="../static/js/MJZLList.js"></script>
+<!-- blockUI 每個分頁都要加入不然會出錯 -->
+<script type="text/javascript" th:src="@{/js/jquery.blockUI.js}" src="../static/js/jquery.blockUI.js"></script>

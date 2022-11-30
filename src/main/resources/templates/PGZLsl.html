@@ -1,0 +1,30 @@
+<body>
+    <!--
+        /**
+        * @author CXY
+        * @version Create Time:2022年6月14日
+        * @Description 鞋墊派工作業-SlipSole
+        *
+        */
+    -->
+    <div class="loadContent">
+        <section class="first30">
+            鞋墊派工作業-SlipSole
+            <br><br>
+            <input id="textDdbh" list="ddbhList" type="text" placeholder="訂單編號" />
+            <datalist id="ddbhList">
+                <!-- option 取得資料的寫法、是從後端傳來的資料 -->
+                <option th:each="getddzl: ${DDZLList}" th:value="${getddzl.getDDBH}" th:text="${getddzl.getDDBH}">
+                </option>
+            </datalist>
+            <input id="getDd" type="button" value="輪次取得">
+            <label id="pairsCount"></label>
+
+        </section>
+    </div>
+</body>
+<!-- 配合 Thymeleaf的寫法、從static位置後開始寫、連同靜態編輯一起引入 -->
+<script type="text/javascript" th:src="@{/js/jquery-3.6.0.min.js}" src="../static/js/jquery-3.6.0.min.js"></script>
+<script th:src="@{./js/PGZLsl.js}" src="../static/js/PGZLsl.js"></script>
+<!-- blockUI 每個分頁都要加入不然會出錯 -->
+<script type="text/javascript" th:src="@{/js/jquery.blockUI.js}" src="../static/js/jquery.blockUI.js"></script>

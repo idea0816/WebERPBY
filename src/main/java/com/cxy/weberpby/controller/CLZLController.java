@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * @author CXY
  * @version Create Time: 2022/4/21
- * @Description 材料資料 - 含材料、配方、配方组成WXYZ、物性、配方单价
+ * @Description 材料資料 - 含材料、配方、配方组成WXYZ、物性、配方单价(頁面)
  * <p>
  *
  * public List<clzlsl> clzlszList() {   // 基礎配方頁面-取得配方List(含W.Y.Y.Z)

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+
+</html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>宝亿主页 Ver2204.01</title>
+    <!-- icon -->
+    <link rel="icon" th:href="@{/images/icon.ico}" href="../static/images/icon.ico">
+
+    <!-- 配合 Thymeleaf的寫法、從static位置後開始寫、連同靜態編輯一起引入 -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/normalize.css}" href="../static/css/normalize.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" href="../static/css/style.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styleElements.css}" href="../static/css/styleElements.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/table.css}" href="../static/css/table.css">
+
+    <!-- alert box import -->
+    <link rel="stylesheet" th:href="@{/css/alertify.core.css}" href="../static/css/alertify.core.css" />
+    <link rel="stylesheet" th:href="@{/css/alertify.default.css}" href="../static/css/alertify.default.css" />
+
+    <!-- print -->
+    <link rel="stylesheet" th:href="@{/css/print.css}" href="../static/css/print.css" />
+
+    <!-- DataTable -->
+    <!-- <link rel="stylesheet" th:href="@{/css/datatables.min.css}" href="../static/css/datatables.min.css"> -->
+
+</head>
+
+<body>
+    <!--
+        /**
+        * @author CXY
+        * @version Create Time:2022年2月16日
+        * @Description 宝亿进入点
+        *
+        */
+    -->
+
+    <header>
+        <div class="logo">
+            <h1>WebERP </h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a id="backHome" href="#">Home</a></li>
+                <li><a id="front" href="#">底厂前段</a></li>
+                <li><a id="manager" href="#">底厂生管</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div id="main_nav">
+            <!-- <p>This is Main Nav</p> -->
+        </div>
+        <div id="content">
+            <p>公告事项：</p><br>
+            <div style="margin: 0px auto;">
+                <h3 style="color: brown;">每次系统升级后、请务必依下列步骤清除旧资料、以免出错</h3><br>
+                <img th:src="@{/images/RefreshChrome_1.png}" src="../static/images/RefreshChrome_1.png" alt=""
+                    style="width: 800px;"><br>
+                <img th:src="@{/images/RefreshChrome_2.png}" src="../static/images/RefreshChrome_2.png" alt=""
+                    style="width: 800px;"><br>
+                <img th:src="@{/images/RefreshChrome_3.png}" src="../static/images/RefreshChrome_3.png" alt=""
+                    style="width: 400px;"><br>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <!-- <img title="footerImg" src=""> -->
+        <p>2022 Copyright &copy; BaoYi, All Rights Reserved </p>
+        <p>│Best Resolution : IE8+, Edge, Chrome, Safari or Firefox │ Best View
+            use : over 1024X768 │ Designed by C.X.Y</p>
+    </footer>
+
+</body>
+<!-- 配合 Thymeleaf的寫法、從static位置後開始寫、連同靜態編輯一起引入 -->
+<script type="text/javascript" th:src="@{/js/jquery-3.6.0.min.js}" src="../static/js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" th:src="@{/js/index.js}" src="../static/js/index.js"></script>
+<!-- alert box import -->
+<script type="text/javascript" th:src="@{/js/alertify.min.js}" src="../static/js/alertify.min.js"></script>
+<!-- blockUI -->
+<script type="text/javascript" th:src="@{/js/jquery.blockUI.js}" src="../static/js/jquery.blockUI.js"></script>
+
+</html>

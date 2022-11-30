@@ -4,7 +4,6 @@ package com.cxy.weberpby.model;
  * @author CXY
  * @version Create Time:2022年2月16日
  * @Description 型体基本資料 - Size & 重量
- *
  */
 
 public class XXZLS1 {

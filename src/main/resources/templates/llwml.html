@@ -1,0 +1,56 @@
+<body>
+    <!--
+        /**
+        * @author CXY
+        * @version Create Time:2022年5月30日
+        * @Description 萬馬力領料作業(棄用)
+        *
+        */
+    -->
+    <div class="loadContent">
+        <section class="first30">
+            <br>萬馬力領料單<br><br>
+            <input type="button" id="" value="已領料" />
+            <div style="height: 400px; overflow:auto">
+                <table id="llTable">
+                    <tr>
+                        <th style="width: 35%;">派工日期</th>
+                        <th>派工(領料)單號</th>
+                    </tr>
+                    <tr th:each="getPGZLList: ${getPGZL}">
+                        <td th:text="${getPGZLList.getDATE1}">111</td>
+                        <td th:text="${getPGZLList.getPGDATE}">111</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+        <!-- 右半頁內容 -->
+        <section class="second">
+            <br>
+            <div>
+                <input type="button" id="buttonSave" value="確認領料" />
+                <input type="button" id="getall" value="一鍵領料" />
+                <input type="button" id="buttonQuit" value="放弃">
+            </div>
+            <br>
+            <div id="divllList">
+                <br>
+                <table id="llListTable" style="">
+                    <tr>
+                        <th>物料代號</th>
+                        <th>物料名稱</th>
+                        <th>應領用量Kgs</th>
+                        <th>實領用量Kgs</th>
+                        <th>差異數量Kgs</th>
+                    </tr>
+                </table>
+            </div>
+
+        </section>
+    </div>
+</body>
+<!-- 配合 Thymeleaf的寫法、從static位置後開始寫、連同靜態編輯一起引入 -->
+<script type="text/javascript" th:src="@{/js/jquery-3.6.0.min.js}" src="../static/js/jquery-3.6.0.min.js"></script>
+<script th:src="@{./js/llwml.js}" src="../static/js/llwml.js"></script>
+<!-- blockUI 每個分頁都要加入不然會出錯 -->
+<script type="text/javascript" th:src="@{/js/jquery.blockUI.js}" src="../static/js/jquery.blockUI.js"></script>

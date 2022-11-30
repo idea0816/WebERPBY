@@ -1,0 +1,71 @@
+<body>
+    <!--
+        /**
+        * @author CXY
+        * @version Create Time:2022年6月2日
+        * @Description 派工-領料單列印頁面(合併所有的派工)- PGZLS1 Table
+        *
+        */
+    -->
+    <div class="loadContent">
+        <section class="first30">
+            <br><br>
+            <div style="height: 250px; overflow:auto">
+                <table id="pgTable">
+                    <tr>
+                        <th>派工單號</th>
+                        <th>派工日期</th>
+                    </tr>
+                    <tr th:each="getPGZLList: ${getPGZL}">
+                        <td th:text="${getPGZLList.getPGDATE}">111</td>
+                        <td th:text="${getPGZLList.getDATE1}">111</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+        <!-- 右半頁內容 -->
+        <section class="second">
+            <br>
+            <!-- 萬馬力派工 -->
+            <div id="wmlInput">
+                <label for="textPGNO" class="left">派工單號</label>
+                <input type="text" id="textPGNO" class="right">
+            </div>
+            <br>
+            <!-- 大車派工 -->
+            <table id="pgList" style="display: none;">
+                <tr>
+                    <td>派工單號：</td>
+                    <td><input type="text" style="width: 100%;" disabled /></td>
+                    <td><input type="text" style="width: 100%;" disabled /></td>
+                    <td><input type="text" style="width: 100%;" disabled /></td>
+                    <td><input type="text" style="width: 100%;" disabled /></td>
+                    <td><input type="text" style="width: 100%;" disabled /></td>
+                </tr>
+            </table>
+            <br>
+            <div id="llArea" style="display: none;">
+                <input id="getPGZLS1" type="button" value="生成領料單">
+                <input id="pgzls1Print" type="button" value="列印領料單">
+            </div>
+            <!-- 顯示含列印頁面 -->
+            <div id="afPrintZone">
+                <table id="pgzls1Table" style="display: none;">
+                    <caption><label id="lbprint"></label> 領料單</caption>
+                    <tr>
+                        <th>物料代號</th>
+                        <th>物料名稱</th>
+                        <th>應領用量</th>
+                    </tr>
+                </table>
+            </div>
+        </section>
+    </div>
+</body>
+<!-- 配合 Thymeleaf的寫法、從static位置後開始寫、連同靜態編輯一起引入 -->
+<script type="text/javascript" th:src="@{/js/jquery-3.6.0.min.js}" src="../static/js/jquery-3.6.0.min.js"></script>
+<script th:src="@{./js/PGZLS1.js}" src="../static/js/PGZLS1.js"></script>
+<!-- blockUI 每個分頁都要加入不然會出錯 -->
+<script type="text/javascript" th:src="@{/js/jquery.blockUI.js}" src="../static/js/jquery.blockUI.js"></script>
+<!-- DataTable -->
+<!-- <script type="text/javascript" th:src="@{/js/datatables.min.js}" src="../static/js/datatables.min.js"></script> -->

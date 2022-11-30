@@ -4,6 +4,8 @@ package com.cxy.weberpby.dto;
  * @author CXY
  * @version Create Time: 2022/4/27
  * @Description 配方類查詢條件設定(CLZL, clzlsl, clzlsz)
+ *
+ * 部位查詢條件也用這個代用
  */
 public class CLZLQueryParams {
     private String cldh; // 配方代號

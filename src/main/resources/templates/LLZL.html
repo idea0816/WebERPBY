@@ -1,0 +1,90 @@
+<body>
+    <!--
+        /**
+        * @author CXY
+        * @version Create Time:2022年6月8日
+        * @Description 領料作業
+        *
+        */
+    -->
+    <div class="loadContent">
+        <section class="first30">
+            <br><br>
+            <input type="button" id="" value="自由領料" />
+            <input type="button" id="" value="已領料" />
+            <div style="height: 400px; overflow:auto">
+                <table id="llTable">
+                    <tr>
+                        <th>領料單號</th>
+                    </tr>
+                    <tr th:each="getLLZLList: ${getLLZL}">
+                        <td th:text="${getLLZLList.getLLBH}">111</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+        <!-- 右半頁內容 -->
+        <section class="second">
+            <br>
+            <div>
+                <input type="button" id="buttonSave" value="確認領料" />
+                <input type="button" id="getall" value="一鍵領料" />
+                <input type="button" id="buttonQuit" value="放弃">
+            </div>
+            <br>
+            <div id="divllList">
+                <br>
+                <table id="llListTable" style="">
+                    <tr>
+                        <th>物料代號</th>
+                        <th>物料名稱</th>
+                        <th>應領用量Kgs</th>
+                        <th>實領用量Kgs</th>
+                        <th>差異數量Kgs</th>
+                    </tr>
+                </table>
+            </div>
+            <div>
+                <!-- 原物料列表 Table -->
+                <table id="wlTable" style="">
+                    <tr>
+                        <th style="width: 70%;">原物料名称</th>
+                        <th>領用量</th>
+                        <th>新增</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input id="zwpmChoice" list="zwpmList" type="text" style="width: 80%;" />
+                            <datalist id="zwpmList">
+                                <option th:each="getAllA: ${getAllAList}" th:value="${getAllA.getCldh}"
+                                    th:text="${getAllA.getZwpm}"></option>
+                            </datalist>
+                        </td>
+                        <td class="td_center">
+                            <input id="clylget" type="text" style="width: 50%;" />
+                        </td>
+                        <td class="td_center">
+                            <input id="addCol" type="button" value="Add" style="width: 50%;" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div>
+                <!-- 自由領用 Table -->
+                <table id="Formula_getList">
+                    <tr>
+                        <th>材料代号</th>
+                        <th>領用量</th>
+                        <th class="delCol" style="width:5%; display: none;"></th>
+                    </tr>
+                </table>
+            </div>
+
+        </section>
+    </div>
+</body>
+<!-- 配合 Thymeleaf的寫法、從static位置後開始寫、連同靜態編輯一起引入 -->
+<script type="text/javascript" th:src="@{/js/jquery-3.6.0.min.js}" src="../static/js/jquery-3.6.0.min.js"></script>
+<script th:src="@{./js/LLZL.js}" src="../static/js/LLZL.js"></script>
+<!-- blockUI 每個分頁都要加入不然會出錯 -->
+<script type="text/javascript" th:src="@{/js/jquery.blockUI.js}" src="../static/js/jquery.blockUI.js"></script>

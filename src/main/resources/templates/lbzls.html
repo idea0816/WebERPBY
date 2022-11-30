@@ -1,0 +1,99 @@
+<body>
+    <!--
+        /**
+        * @author CXY
+        * @version Create Time:2022年4月27日
+        * @Description 类别资料页面
+        *
+        */
+    -->
+    <div class="loadContent">
+        <section class="first30">
+            <br>
+            <input id="newL" type="button" value="新建主类别">
+            <input id="delL" type="button" value="删除主类别">
+            <br>
+            <table id="lbTable">
+                <tr>
+                    <th class="tsmall">类别编号</th>
+                    <th class="tsmall">类别项目</th>
+                    <th class="tsmall">说明</th>
+                </tr>
+                <tr th:each="lbzlList: ${getlbzlList}" th:class="${lbzlList.getLb}" style="">
+                    <td th:text="${lbzlList.getLb}" class="tsmall">111</td>
+                    <td th:text="${lbzlList.getZwsm}" class="tsmall">111</td>
+                    <td th:text="${lbzlList.getBz}" class="tsmall">111</td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- 右半頁內容 -->
+        <section class="second">
+            <br><br><br>
+            <div>
+                <label for="textlb" class="left">类别编号</label>
+                <input type="text" id="textlb" class="right" placeholder="只能2位数字">
+                <label for="textzwsm" class="left">类别项目</label>
+                <input type="text" id="textzwsm" class="right">
+                <label for="textbz" class="left">说明</label>
+                <input type="text" id="textbz" class="right">
+            </div>
+            <div>
+                <input id="buttonAdd" type="button" value="修改">
+                <input id="buttonDel" type="button" value="删除">
+                <input id="buttonSave" type="button" value="存档">
+                <input id="buttonQuit" type="button" value="放弃">
+            </div>
+            <div>
+                <!-- 新增類別資料明細 Table -->
+                <table id="lbzlTable" style="display: none;">
+                    <tr>
+                        <th>类别代号</th>
+                        <th>中文名称</th>
+                        <th>说明一</th>
+                        <th>说明二</th>
+                        <th>新增</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input id="lbdhget" type="text" style="width: 100%;" />
+                        </td>
+                        <td>
+                            <input id="zwsmget" type="text" style="width: 100%;" />
+                        </td>
+                        <td class="td_center">
+                            <input id="bzget" type="text" style="width: 100%;" />
+                        </td>
+                        <td class="td_center">
+                            <input id="bz1get" type="text" style="width: 100%;" />
+                        </td>
+                        <td class="td_center">
+                            <input id="addCol" type="button" value="Add" style="width: 50%;" />
+                        </td>
+                    </tr>
+                </table>
+                <br>
+            </div>
+            <div>
+                <!-- 類別資料明細 Table -->
+                <table id="lbzls_getList">
+                    <tr>
+                        <th>类别代号</th>
+                        <th>中文</th>
+                        <th>说明一</th>
+                        <th>说明二</th>
+                        <th class="delCol" style="width:5%; display: none;"></th>
+                    </tr>
+                    <!-- <tr th:each="getlbzls: ${getlbzlsBwList}" th:class="${getlbzls.getLbdh}">
+                        <td th:text="${getlbzls.getLbdh}">类别代号</td>
+                        <td th:text="${getlbzls.getZwsm}">中文</td>
+                        <td th:text="${getlbzls.getBz}">尺寸起</td>
+                        <td th:text="${getlbzls.getBz1}">尺寸讫</td>
+                    </tr> -->
+                </table>
+            </div>
+        </section>
+    </div>
+</body>
+<!-- 配合 Thymeleaf的寫法、從static位置後開始寫、連同靜態編輯一起引入 -->
+<script th:src="@{./js/lbzls.js}" src="../static/js/lbzls.js"></script>

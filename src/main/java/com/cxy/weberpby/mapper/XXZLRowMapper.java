@@ -10,12 +10,11 @@ import java.sql.SQLException;
  * @author CXY
  * @version Create Time:2022年2月16日
  * @Description 型体基本資料
- *
  */
 
-public class XXZLRowMapper implements RowMapper {
+public class XXZLRowMapper implements RowMapper<XXZL> {
     @Override
-    public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
+    public XXZL mapRow(ResultSet rs, int rowNum) throws SQLException {
         XXZL xxzl = new XXZL();
         xxzl.setXieXing(rs.getString("XieXing"));
         xxzl.setSheHao(rs.getString("SheHao"));

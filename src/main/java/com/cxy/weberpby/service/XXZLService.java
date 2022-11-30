@@ -1,6 +1,8 @@
 package com.cxy.weberpby.service;
 
 import com.cxy.weberpby.model.XXZL;
+import com.cxy.weberpby.model.XXZLS;
+import com.cxy.weberpby.model.XXZLSERP;
 
 import java.util.List;
 
@@ -8,16 +10,36 @@ import java.util.List;
  * @author CXY
  * @version Create Time:2022年2月16日
  * @Description 型体資料
- *
- * String updateDdXXZL();   // 自动导入鞋厂型体资料
- * List<XXZL> getErpXiexing();  // 取得鞋厂订单的型体资料(*注意、是已放行的订单*)
+ * <p>
+ * String countNoXXZLData();  // 檢查有多少型體沒有部位資料
+ * List<XXZL> getXSANA();    // 列出沒有部位的ARTICLE
+ * List<String> getARTICLE();   // 取得ARTICLE
+ * List<XXZLSERP> getXXZLSErp(String ARTICLE);    // 取得鞋廠BOM表
+ * List<XXZL> getXSA();   // 取得型体资料(XieXing, SheHao, ARTICLE)
+ * void insertXXZLS(List<XXZLS> insertXXZLS);    // Insert XXZLS
+ * void updateXXZLS(List<XXZLS> updateXXZLS);    // Update XXZLS
  */
 
 public interface XXZLService {
 
-    // 自动导入鞋厂型体资料
-    String updateDdXXZL();
+    // 檢查有多少型體沒有部位資料
+    String countNoXXZLData();
 
-    // 取得鞋厂订单的型体资料(*注意、是已放行的订单*)
-    List<XXZL> getErpXiexing();
+    // 列出沒有部位的ARTICLE
+    List<XXZL> getXSANA();
+
+    // 取得ARTICLE
+    List<String> getARTICLE();
+
+    // 取得鞋廠BOM表
+    List<XXZLSERP> getXXZLSErp(String ARTICLE);
+
+    // 取得型体资料(XieXing, SheHao, ARTICLE)
+    List<XXZL> getXSA();
+
+    // Insert XXZLS
+    void insertXXZLS(List<XXZLS> insertXXZLS);
+
+    // Update XXZLS
+    void updateXXZLS(List<XXZLS> updateXXZLS);
 }

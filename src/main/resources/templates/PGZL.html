@@ -1,0 +1,166 @@
+<body>
+    <!--
+        /**
+        * @author CXY
+        * @version Create Time:2022年5月19日
+        * @Description 萬馬力派工頁面
+        *
+        */
+    -->
+    <div class="loadContent">
+        <section class="first30">
+            <br><br>
+            <input id="getPG" type="button" value="派工">
+            肧料需求：<input id="getVR" type="button" value="不依需求">
+            <div style="height: 200px; overflow:auto">
+                <table id="pfTable1" style="display: none;">
+                    <tr>
+                        <th>配方代號</th>
+                        <th>配方名稱</th>
+                        <th>一手重量</th>
+                    </tr>
+                    <tr th:each="getDDZLVR: ${getVRfromDDZL}">
+                        <td th:text="${getDDZLVR.getCldh}" class="tsmall">111</td>
+                        <td th:text="${getDDZLVR.getCQDH}" class="tsmall">111</td>
+                        <td th:text="${getDDZLVR.getKGS}" class="tsmall">111</td>
+                    </tr>
+                </table>
+            </div>
+            <br><br>
+            <div style="height: 250px; overflow:auto">
+                <table id="pgTable">
+                    <tr>
+                        <th>派工單號</th>
+                        <th>派工日期</th>
+                    </tr>
+                    <tr th:each="getPGZLList: ${getPGZL}">
+                        <td th:text="${getPGZLList.getPGDATE}">111</td>
+                        <td th:text="${getPGZLList.getDATE1}">111</td>
+                    </tr>
+                </table>
+            </div>
+            <!-- <table id="pfTable2" style="display: none;">
+                <tr>
+                    <th>配方代號</th>
+                    <th>配方名稱</th>
+                </tr>
+                <tr th:each="getAllVR: ${getAllVRList}">
+                    <td th:text="${getAllVR.getCldh}" class="tsmall">111</td>
+                    <td th:text="${getAllVR.getZwpm}" class="tsmall">111</td>
+                </tr>
+            </table> -->
+        </section>
+        <!-- 右半頁內容 -->
+        <section class="second">
+            <br><br>
+            <div>
+                <label for="textPGNO" class="left">派工單號</label>
+                <input type="text" id="textPGNO" class="right">
+                <div id="inputArea" style="display: none;">
+                    <label for="textDate" class="left">派工日期</label>
+                    <input type="date" id="textDate" class="right">
+                    <label for="textClass" class="left">班別</label>
+                    <input id="textClass" list="classList" type="text" class="right" />
+                    <datalist id="classList">
+                        <option>早班</option>
+                        <option>晚班</option>
+                    </datalist>
+                </div>
+                <br><br>
+                <div id="bg1" style="display: none;">
+                    <input id="buttonAdd" type="button" value="新增">
+                    <input id="buttonDel" type="button" value="删除">
+                    <input id="buttonSave" type="button" value="存档">
+                    <input id="buttonQuit" type="button" value="放弃">
+                </div>
+                <br>
+                <div id="pfInputArea" style="display: none;">
+                    <table>
+                        <tr>
+                            <td><input id="textCldh" type='text' placeholder='配方代號' style='width: 100% ;'></td>
+                            <td><input id="textZwpm" type='text' placeholder='配方名稱' style='width: 100% ;'></td>
+                            <td><input id="textPgss" type='text' placeholder='派工手數' style='width: 100% ;'></td>
+                            <td><input id="textKgs" type='text' placeholder='派工總重' style='width: 100% ;'></td>
+                        </tr>
+                    </table>
+                </div>
+                <br>
+                <div id="calArea" style="display: none;">
+                    <input id="buttonPrint" type="button" value="列印派工單">
+                </div>
+                <br>
+                <table id="pgTableList" style="display: none;">
+                    <tr>
+                        <th>配方代號</th>
+                        <th>配方名稱</th>
+                        <th>派工手數</th>
+                        <th>派工總重Kg</th>
+                    </tr>
+                </table>
+                <br>
+            </div>
+        </section>
+    </div>
+    <br><br><br>
+    <div>
+        <!-- 列印頁面 -->
+        <div id="afPrivewPrint" style="display: none;">
+            <div id="afPrintZone" class="page">
+                <table>
+                    <caption>
+                        <label class="label_title">
+                            <h2>萬馬力胚料生產派工單</h2>
+                        </label>
+                    </caption>
+                    <tr>
+                        <td rowspan="5"></td>
+                    </tr>
+                    <tr>
+                        <td>派工單號：</td>
+                        <td>
+                            <label id="lbPgno"></label>
+                        </td>
+                        <td>派工日期：</td>
+                        <td>
+                            <label id="lbDate"></label>
+                        </td>
+                        <td>班別：</td>
+                        <td>
+                            <label id="lbClass"></label>
+                        </td>
+                    </tr>
+                </table>
+                <br><br>
+                <table id="pgTablePrint">
+                    <tr>
+                        <th>配方代號</th>
+                        <th>配方名稱</th>
+                        <th>派工手數</th>
+                        <th>派工總重Kg</th>
+                    </tr>
+                </table>
+                <br><br><br>
+
+                <!-- <label class="label_title">
+                    <h2>萬馬力材料申領單</h2>
+                </label>
+                <br><br>
+                <table id="pgzls1Print">
+                    <tr>
+                        <th>物料代號</th>
+                        <th>物料名稱</th>
+                        <th>應領用量Kg</th>
+                        <th>超領數量</th>
+                    </tr>
+                </table> -->
+            </div>
+        </div>
+    </div>
+</body>
+<!-- 配合 Thymeleaf的寫法、從static位置後開始寫、連同靜態編輯一起引入 -->
+<script type="text/javascript" th:src="@{/js/jquery-3.6.0.min.js}" src="../static/js/jquery-3.6.0.min.js"></script>
+<script th:src="@{./js/PGZL.js}" src="../static/js/PGZL.js"></script>
+<!-- blockUI 每個分頁都要加入不然會出錯 -->
+<script type="text/javascript" th:src="@{/js/jquery.blockUI.js}" src="../static/js/jquery.blockUI.js"></script>
+<!-- DataTable -->
+<!-- <script type="text/javascript" th:src="@{/js/datatables.min.js}" src="../static/js/datatables.min.js"></script> -->

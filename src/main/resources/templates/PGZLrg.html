@@ -1,0 +1,160 @@
+<body>
+    <!--
+        /**
+        * @author CXY
+        * @version Create Time:2022年6月9日
+        * @Description 打粗派工作業-Rough
+        *
+        */
+    -->
+    <div class="loadContent">
+        <section class="first30">
+            打粗派工作業-Rough
+            <br><br>
+            <input id="textDdbh" list="ddbhList" type="text" placeholder="訂單編號" />
+            <datalist id="ddbhList">
+                <!-- option 取得資料的寫法；getArticleList 是從後端傳來的資料 -->
+                <option th:each="getddzl: ${DDZLList}" th:value="${getddzl.getDDBH}" th:text="${getddzl.getDDBH}">
+                </option>
+            </datalist>
+            <input id="getDd" type="button" value="輪次取得">
+            <label id="pairsCount"></label>
+            <!-- 輪次列表 -->
+            <div id="divDT" style="height: 200px; overflow:auto">
+                <table id="ddlcTable">
+                    <tr>
+                        <th>輪次</th>
+                        <th>鞋廠成型日</th>
+                        <th>雙數</th>
+                    </tr>
+                </table>
+            </div>
+            <br><br>
+            <div style="height: 250px; overflow:auto">
+                <table id="pgTable">
+                    <tr>
+                        <th>派工單號</th>
+                        <th>派工日期</th>
+                    </tr>
+                    <tr th:each="getPGZLList: ${getPGZL}">
+                        <td th:text="${getPGZLList.getPGDATE}">111</td>
+                        <td th:text="${getPGZLList.getDATE1}">111</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+        <!-- 右半頁內容 -->
+        <section class="second">
+            <br><br>
+            <div>
+                <div id="inputArea" style="display: none;">
+                    <table>
+                        <tr>
+                            <td><label for="textPGNO" class="left">派工單號</label></td>
+                            <td colspan="2"><input type="text" id="textPGNO" style="width: 100%;" disabled></td>
+                        </tr>
+                        <tr>
+                            <td colspan="4"></td>
+                        </tr>
+                        <tr>
+                            <td><label for="textDate" class="left">派工日期</label></td>
+                            <td><input type="date" id="textDate" style="width: 100%;"></td>
+                            <td><label for="textClass" class="left">班別</label></td>
+                            <td>
+                                <input id="textClass" list="classList" type="text" style="width: 100%;" />
+                                <datalist id="classList">
+                                    <option>早班</option>
+                                    <option>晚班</option>
+                                </datalist>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label for="textTeam" class="left">鞋廠組別</label></td>
+                            <td>
+                                <input type="text" id="textTeam" list="depList" style="width: 100%;">
+                                <datalist id="depList">
+                                    <!-- option 取得資料的寫法；getArticleList 是從後端傳來的資料 -->
+                                    <option th:each="getdepList: ${depList}" th:value="${getdepList.getDepMemo}"
+                                        th:text="${getdepList.getID}">
+                                    </option>
+                                </datalist>
+                            </td>
+                            <td><label for="textCtime" class="left">成型時段</label></td>
+                            <td>
+                                <input id="textCtime" list="ctimeList" type="text" style="width: 100%;" />
+                                <datalist id="ctimeList">
+                                    <option>08:00-10:00</option>
+                                    <option>10:00-12:00</option>
+                                    <option>13:00-15:00</option>
+                                    <option>15:00-17:00</option>
+                                    <option>17:00-19:00</option>
+                                </datalist>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <br>
+                <div id="bg1" style="display: none;">
+                    <input id="buttonPG" type="button" value="派工">
+                    <!-- <input id="buttonAdd" type="button" value="新增"> -->
+                    <input id="buttonDel" type="button" value="删除" disabled>
+                    <input id="buttonSave" type="button" value="存档">
+                    <input id="buttonQuit" type="button" value="放弃">
+                </div>
+                <div id="smddsArea" style="height: 100px; overflow:auto; display: none;">
+                    <table id="smddsTable">
+                        <tr>
+                            <th>輪次</th>
+                            <th>尺寸</th>
+                            <th>數量</th>
+                        </tr>
+                    </table>
+                </div>
+                <br>
+                <div id="calArea" style="display: none;">
+                    <input id="buttonbornPG" type="button" value="生成派工單" />
+                    <input id="buttonpgPrint" type="button" value="列印派工單" disabled />
+                </div>
+                <br>
+                <table id="roundList" style="display: none;">
+                    <tr>
+                        <td>輪次：</td>
+                        <td><input type="text" style="width: 100%;" disabled /></td>
+                        <td><input type="text" style="width: 100%;" disabled /></td>
+                        <td><input type="text" style="width: 100%;" disabled /></td>
+                        <td><input type="text" style="width: 100%;" disabled /></td>
+                        <td><input type="text" style="width: 100%;" disabled /></td>
+                    </tr>
+                    <tr>
+                        <td>派工雙數：</td>
+                        <td><input id="pgPairs" type="text" style="width: 100%;" disabled /></td>
+                    </tr>
+                </table>
+            </div>
+            <br>
+
+            <div id="psTable" style="height: 200px; overflow:auto; display: none;">
+                <table id="pgSize">
+                    <tr>
+                        <th>尺寸</th>
+                        <th>數量</th>
+                    </tr>
+                </table>
+            </div>
+            <br>
+            <br><br><br>
+    </div>
+    </section>
+    <!-- 列印頁面 -->
+    <div id="afPrivewPrint" style="">
+        <div id="afPrintZone">
+
+        </div>
+    </div>
+    </div>
+</body>
+<!-- 配合 Thymeleaf的寫法、從static位置後開始寫、連同靜態編輯一起引入 -->
+<script type="text/javascript" th:src="@{/js/jquery-3.6.0.min.js}" src="../static/js/jquery-3.6.0.min.js"></script>
+<script th:src="@{./js/PGZLrg.js}" src="../static/js/PGZLrg.js"></script>
+<!-- blockUI 每個分頁都要加入不然會出錯 -->
+<script type="text/javascript" th:src="@{/js/jquery.blockUI.js}" src="../static/js/jquery.blockUI.js"></script>

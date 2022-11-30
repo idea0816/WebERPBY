@@ -1,6 +1,7 @@
 package com.cxy.weberpby.dao.impl;
 
 import com.cxy.weberpby.dao.lbzlsDao;
+import com.cxy.weberpby.mapper.bwRowMapper;
 import com.cxy.weberpby.mapper.lbzlRowMapper;
 import com.cxy.weberpby.mapper.lbzlsRowMapper;
 import com.cxy.weberpby.model.lbzl;
@@ -20,8 +21,9 @@ import java.util.Map;
  * @version Create Time:2022年2月16日
  * @Description 代号类别明细资料 - 上一层是 lbzl
  * <p>
- * Integer checkBwlbzls(String BWBH);    // 检查部位类别明细资料是否存在
- * String lbzlsBwInsert();    // 写入部位类别明细资料
+ * List<lbzls> get2BW(); // 取得鞋廠部位(編號、名稱)
+ * List<lbzls> get2BWbw(String lb); // 取得底廠部位(編號、名稱)
+ * List<lbzls> getBW(String bwbh); // 取得鞋廠部位資料
  * List<lbzls> getlbzlList();   // 取得类别lbzl資料
  * List<lbzls> getlbzlsList();  // 取得类别明细lbzls明细资料
  * void insertlbzl(lbzl lbzl);   //新增lbzl資料
@@ -40,33 +42,56 @@ public class lbzlsDaoImpl implements lbzlsDao {
 
     Map<String, Object> map;
 
-    // 检查部位类别明细资料是否存在
+    // 取得鞋廠部位(編號、名稱)
     @Override
-    public Integer checkBwlbzls(String BWBH) {
-        String sqlchecklbzls = "SELECT COUNT(*) FROM lbzls WHERE lbdh = :BWBH";
-
+    public List<lbzls> get2BW() {
+        String sqlget2BW = "SELECT xxzls.BWBH as lbdh, bwzl.zwsm FROM LBY_ERP.dbo.xxzls xxzls, LBY_ERP.dbo.bwzl bwzl " +
+                "WHERE xxzls.CSBH = 'BAO' AND xxzls.CLBH LIKE 'J%' AND xxzls.BWBH = bwzl.bwdh " +
+                "GROUP BY xxzls.BWBH, bwzl.zwsm ORDER BY bwzl.zwsm ";
         map = new HashMap<>();
-        map.put("BWBH", BWBH);
-        return lbyddJdbcTemplate.queryForObject(sqlchecklbzls, map, Integer.class);
+        List<lbzls> getl2BWList = lbyddJdbcTemplate.query(sqlget2BW, map, new bwRowMapper());
+
+        if (getl2BWList.size() > 0) {
+            return getl2BWList;
+        } else {
+            return null;
+        }
     }
 
-    // 写入部位类别明细资料
+    // 取得底廠部位(編號、名稱)
     @Override
-    public String lbzlsBwInsert(lbzls lbzls) {
-        String sqllbzlsInsert = "INSERT INTO lbzls (lb, lbdh, zwsm, ywsm, bz, bz1,USERID, USERDATE) " +
-                "(SELECT :lb, bwzl.bwdh, bwzl.zwsm, bwzl.ywsm, :bz, :bz1, 'SUPER', :USERDATE " +
-                "FROM LBY_ERP.dbo.bwzl bwzl " +
-                "where bwzl.bwdh = :BWDH)";
-
+    public List<lbzls> get2BWbw(String lb) {
+        String sqlget2BWbw = "SELECT XB.lbdh, bwzl.zwsm FROM " +
+                "XXZLS1_B XB, LBY_ERP.dbo.bwzl bwzl " +
+                "WHERE XB.bwlb = :lb AND XB.lbdh = bwzl.bwdh " +
+                "GROUP BY XB.lbdh, bwzl.zwsm";
         map = new HashMap<>();
-        map.put("lb", lbzls.getLb());
-        map.put("BWDH", lbzls.getLbdh());
-        map.put("bz", lbzls.getBz());
-        map.put("bz1", lbzls.getBz1());
-        map.put("USERDATE", lbzls.getUSERDATE());
+        map.put("lb", lb);
+        List<lbzls> getl2BWbw = lbyddJdbcTemplate.query(sqlget2BWbw, map, new bwRowMapper());
 
-        lbyddJdbcTemplate.update(sqllbzlsInsert, map);
-        return null;
+        if (getl2BWbw.size() > 0) {
+            return getl2BWbw;
+        } else {
+            return null;
+        }
+    }
+
+    // 取得鞋廠部位資料
+    @Override
+    public List<lbzls> getBW(String bwbh) {
+        String sqlgetBW = "SELECT TOP 1 'lb' as lb, BWBH as lbdh, bwzl.zwsm, bwzl.ywsm, xxzls.CCQQ as bz, xxzls.CCQZ as bz1, 'USERID' as USERID, 'USERDATE' as USERDATE " +
+                "FROM LBY_ERP.dbo.xxzls xxzls, LBY_ERP.dbo.bwzl bwzl " +
+                "WHERE xxzls.bwbh = :bwbh AND xxzls.BWBH = bwzl.bwdh";
+        map = new HashMap<>();
+        map.put("bwbh", bwbh);
+
+        List<lbzls> getlBWList = lbyddJdbcTemplate.query(sqlgetBW, map, new lbzlsRowMapper());
+
+        if (getlBWList.size() > 0) {
+            return getlBWList;
+        } else {
+            return null;
+        }
     }
 
     // 取得类别lbzl資料
@@ -149,7 +174,7 @@ public class lbzlsDaoImpl implements lbzlsDao {
     @Override
     public void insertlbzls(lbzls lbzls) {
         String sqlinsertlbzls = "INSERT INTO lbzls " +
-                "VALUES (:lb,:lbdh, :zwsm, :ywsm, :bz, :bz1, :USERID, :USERDATE) ";
+                "VALUES (:lb, :lbdh, :zwsm, :ywsm, :bz, :bz1, :USERID, :USERDATE) ";
         map = new HashMap<>();
         map.put("lb", lbzls.getLb());
         map.put("lbdh", lbzls.getLbdh());

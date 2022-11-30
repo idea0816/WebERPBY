@@ -1,0 +1,22 @@
+@charset "UTF-8";
+div.page {
+  -moz-column-break-after: page;
+       break-after: page;
+}
+
+/* 如果不設置，最後一區塊後面會多出一個空白頁 */
+div.page:last-child {
+  -moz-column-break-after: auto;
+       break-after: auto;
+}
+
+table.forsp {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid black;
+}
+table.forsp th,
+table.forsp td {
+  border: 1px solid black;
+  text-align: center;
+}/*# sourceMappingURL=print.css.map */

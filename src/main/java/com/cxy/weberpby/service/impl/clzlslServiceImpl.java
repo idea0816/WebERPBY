@@ -18,7 +18,9 @@ import java.util.Objects;
  * @Description 配方组成資料(clzlsl & clzlsz 共用)
  * <p>
  * List<clzlsl> getclzlsl(String cldh);  // Get Data of clzlsl
+ * void insertClzlsl(clzlsl clzlsl);   // Insert clzlsl
  * List<clzlsl> getclzlsz(String cldh);  // Get Data of clzlsz
+ * List<clzlsl> getRealclzlsz(String cldh) {}   // Get Real Data of clzlsz
  * void deleteclzlsz(String cldh);  // Delete clzlsz
  */
 
@@ -53,6 +55,12 @@ public class clzlslServiceImpl implements clzlslService {
         return pfList;
     }
 
+    // Insert clzlsl
+    @Override
+    public void insertClzlsl(clzlsl clzlsl) {
+        clzlslDao.insertclzlsl(clzlsl);
+    }
+
     // Get Data of clzlsz
     @Override
     public List<clzlsl> getclzlsz(String cldh) {
@@ -67,7 +75,7 @@ public class clzlslServiceImpl implements clzlslService {
         // 取得配方明細資料
         List<clzlsl> pfList = clzlslDao.getclzlsz(realcldh);
         // 把 cldh(RU001) 用原物料中文品名取代掉
-        // 配方類查詢條件設定
+        // 配方類查詢條件設定    // cldj四捨五入到小數點後2位
         for (clzlsl value : pfList) {
             String zwpm = null;
             clzlQueryParams.setCldh(value.getCldhz());
@@ -76,8 +84,19 @@ public class clzlslServiceImpl implements clzlslService {
                 zwpm = value2.getZwpm();
             }
             value.setCldh(zwpm);
+
+            // cldj四捨五入到小數點後2位
+            Double cldjRound = Double.valueOf(Math.round(value.getCldj()*100)/100.0);
+            value.setCldj(cldjRound);
+
         }
         return pfList;
+    }
+
+    // Get Real Data of clzlsz
+    public List<clzlsl> getRealclzlsz(String cldh) {
+        // 取得配方明細資料
+        return clzlslDao.getclzlsz(cldh);
     }
 
     // Delete clzlsz

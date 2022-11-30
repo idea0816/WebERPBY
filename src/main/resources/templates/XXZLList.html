@@ -1,0 +1,78 @@
+<body>
+    <!--
+        /**
+        * @author CXY
+        * @version Create Time:2022年5月3日
+        * @Description 型体明细资料
+        *
+        */
+    -->
+    <div class="">
+        <br><br>
+        <input id="articleChoice" list="articleList" type="text" class="right" placeholder="ArticleList"
+            style="width: calc(100% / 3);" />
+        <!-- option 取得資料的寫法；getArticleList 是從後端傳來的資料 -->
+        <datalist id="articleList">
+            <option th:each="getArticle: ${getArticleList}" th:value="${getArticle}" th:text="${getArticle}">
+            </option>
+        </datalist>
+        <input type="button" id="getData" value="查詢">
+        <input type="text" id="textXieXing" value="型體" disabled>
+        <input type="text" id="textSheHao" value="色號" disabled>
+        <input id="buttonAdd" type="button" value="修改">
+        <input id="buttonSave" type="button" value="存档">
+        <br><br>
+        <div id="divPD">
+            <!-- 型體部位配方配對表 Table -->
+            <table id="pdTable">
+                <tr>
+                    <th style="width: 3%;"></th>
+                    <th>部位代號</th>
+                    <th>鞋廠部位</th>
+                    <th colspan="4">部位說明</th>
+                    <th>斬刀</th>
+                    <th>楦頭編號</th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th>部位類別</th>
+                    <th>底廠部位</th>
+                    <th>項次</th>
+                    <th>顏色</th>
+                    <th>底模斬刀</th>
+                    <th>花輪</th>
+                    <th>寬度</th>
+                    <th>厚度</th>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>鞋廠部位代號</td>
+                    <td>鞋廠部位名稱</td>
+                    <td colspan="4">部位說明</td>
+
+                </tr>
+                <tr>
+                    <td><input type="button" value="&#8609;" style="width: 50% ;"></td>
+                    <td>AAA</td>
+                    <td>BBB</td>
+                    <td>CCC</td>
+                    <td>DDD</td>
+                    <td>EEE</td>
+                    <td>FFF</td>
+                    <td>GGG</td>
+                </tr>
+            </table>
+            <br>
+        </div>
+        <div>
+
+            <label style="color: red;" th:each="getN: ${getNa}" th:text="${getN.getARTICLE}+' & '"></label>
+        </div>
+    </div>
+</body>
+<!-- 配合 Thymeleaf的寫法、從static位置後開始寫、連同靜態編輯一起引入 -->
+<script type=" text/javascript" th:src="@{/js/jquery-3.6.0.min.js}" src="../static/js/jquery-3.6.0.min.js">
+                </script>
+<script th:src="@{./js/XXZLList.js}" src="../static/js/XXZLList.js"></script>
+<!-- blockUI 每個分頁都要加入不然會出錯 -->
+<script type="text/javascript" th:src="@{/js/jquery.blockUI.js}" src="../static/js/jquery.blockUI.js"></script>

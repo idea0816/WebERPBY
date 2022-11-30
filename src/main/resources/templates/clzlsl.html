@@ -1,0 +1,121 @@
+<body>
+    <!--
+        /**
+        * @author CXY
+        * @version Create Time:2022年2月16日
+        * @Description 配方资料
+        *
+        */
+    -->
+    <div class="loadContent">
+        <section class="first30">
+            <br>
+            <input id="newVR" type="button" value="新建配方">
+            <input id="delVR" type="button" value="删除配方">
+            <br>
+            <table id="pfTable">
+                <tr>
+                    <th class="tsmall">配方代号</th>
+                    <th class="tsmall">配方名称</th>
+                    <th class="tsmall">单价</th>
+                    <th class="tsmall">库存数量</th>
+                    <th class="tsmall">一手重量</th>
+                    <th class="tsmall">单位</th>
+                </tr>
+                <tr th:each="getAllVR: ${getAllVRList}" th:class="${getAllVR.getCldh}">
+                    <td th:text="${getAllVR.getCldh}" class="tsmall">111</td>
+                    <td th:text="${getAllVR.getZwpm}" class="tsmall">111</td>
+                    <td th:text="${getAllVR.getCldj}" class="tsmall">111</td>
+                    <td th:text="${getAllVR.getClsl}" class="tsmall">111</td>
+                    <td th:text="${getAllVR.getTotKgs}" class="tsmall">111</td>
+                    <td th:text="${getAllVR.getDwbh}" class="tsmall">111</td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- 右半頁內容 -->
+        <section class="second">
+            <br><br><br>
+            <div>
+                <label for="textcldh" class="left">配方代号</label>
+                <input type="text" id="textcldh" class="right border">
+                <label for="textzwpm" class="left">配方名称</label>
+                <input type="text" id="textzwpm" class="right border">
+            </div>
+            <div>
+                <input id="buttonAdd" type="button" value="修改">
+                <input id="buttonDel" type="button" value="删除">
+                <input id="buttonSave" type="button" value="存档">
+                <input id="buttonQuit" type="button" value="放弃">
+            </div>
+            <div>
+                <!-- 原物料列表 Table -->
+                <table id="wlTable" style="display: none;">
+                    <tr>
+                        <th>类别</th>
+                        <th style="width: 70%;">原物料名称</th>
+                        <th>用量</th>
+                        <th>新增</th>
+                    </tr>
+                    <tr>
+                        <td class="td_center">
+                            <input id="cllbChoice" list="cllbList" type="text" style="width: 50%;" />
+                            <datalist id="cllbList">
+                                <option value="W">
+                                <option value="X">
+                                <option value="Y">
+                                <option value="Z">
+                            </datalist>
+                        </td>
+                        <td>
+                            <input id="zwpmChoice" list="zwpmList" type="text" style="width: 80%;" />
+                            <datalist id="zwpmList">
+                                <option th:each="getAllA: ${getAllAList}" th:value="${getAllA.getCldh}"
+                                    th:text="${getAllA.getZwpm}"></option>
+                            </datalist>
+                        </td>
+                        <td class="td_center">
+                            <input id="clylget" type="text" style="width: 50%;" />
+                        </td>
+                        <td class="td_center">
+                            <input id="addCol" type="button" value="Add" style="width: 50%;" />
+                        </td>
+                    </tr>
+                </table>
+                <br>
+            </div>
+            <div>
+                <!-- 配方明細列表 Table -->
+                <table id="Formula_getList">
+                    <tr>
+                        <th style="width:5%">类别</th>
+                        <th style="width:15%">材料代号</th>
+                        <th style="width:45%">中文品名</th>
+                        <th>PHR</th>
+                        <th>配方用量</th>
+                        <th>单价</th>
+                        <th class="delCol" style="width:5%; display: none;"></th>
+                    </tr>
+                    <!-- <tbody>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="delCol" style="display: none;">
+                                <input type="button" value="Del" style="font-size: 0.75rem; width: 2rem;" />
+                            </td>
+                        </tr>
+                    </tbody> -->
+                </table>
+            </div>
+        </section>
+    </div>
+</body>
+<!-- 配合 Thymeleaf的寫法、從static位置後開始寫、連同靜態編輯一起引入 -->
+<script type="text/javascript" th:src="@{/js/jquery-3.6.0.min.js}" src="../static/js/jquery-3.6.0.min.js"></script>
+<script th:src="@{./js/clzlsl.js}" src="../static/js/clzlsl.js"></script>
+<!-- blockUI 每個分頁都要加入不然會出錯 -->
+<script type="text/javascript" th:src="@{/js/jquery.blockUI.js}" src="../static/js/jquery.blockUI.js"></script>

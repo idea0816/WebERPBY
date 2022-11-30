@@ -1,0 +1,46 @@
+@charset "UTF-8";
+main table {
+  width: 100%;
+  border-bottom-width: 5px;
+  border-bottom-style: solid;
+  border-bottom-color: #278092;
+  table-layout: fixed;
+  /*列寬由表格寬度及列寬決定*/
+}
+main table th {
+  font-size: 1rem;
+  font-weight: bolder;
+  color: #E9F0E0;
+  background-color: #278092;
+}
+main table th.tsmall {
+  font-size: 0.75rem;
+  font-weight: bolder;
+  color: #E9F0E0;
+  background-color: #278092;
+}
+main table tr:hover {
+  background-color: #8be0f1;
+}
+main table tr.on td {
+  background-color: greenyellow;
+}
+main table tr.print {
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: #ddd;
+}
+main table td {
+  font-size: 1rem;
+  text-align: right;
+}
+main table td.tsmall {
+  font-size: 0.75rem;
+  text-align: right;
+}
+main table td.td_center {
+  text-align: center;
+}
+main table td.td_left {
+  text-align: left;
+}/*# sourceMappingURL=table.css.map */

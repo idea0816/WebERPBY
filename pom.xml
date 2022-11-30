@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.cxy</groupId>
     <artifactId>WebERPBY</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.7</version>
     <name>WebERPBY</name>
     <description>WebERPBY</description>
     <properties>
@@ -29,11 +29,16 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
+        <!-- 引入 Spring Security -->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-security</artifactId>-->
+<!--        </dependency>-->
         <!--SQL2008 https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc -->
         <dependency>
             <groupId>com.microsoft.sqlserver</groupId>
             <artifactId>mssql-jdbc</artifactId>
-            <scope>runtime</scope>
+            <version>7.2.2.jre11</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

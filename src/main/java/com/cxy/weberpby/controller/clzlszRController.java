@@ -14,10 +14,15 @@ import java.util.List;
  * @version Create Time: 2022/4/29
  * @Description 標準配方資料(傳值)
  *
+ * 修改點：
+ * 配方搜尋
+ * 列印
+ *
  * public List<clzlsl> getclzlszList(@PathVariable String cldh) // 標準配方組成明細
  * public String updateCLZL(@RequestBody CLZLUpdateParams cup)  // Update CLZL & clzlsz
  * public String insertCLZL(@RequestBody CLZLUpdateParams cup)  // Insert CLZL & clzlsz
  * public String deleteCLZL(@RequestBody String lb) // Delete CLZL & clzlsz
+ * public String getVersion(@PathVariable String cldh)  // 取得配方最新版次
  */
 
 @RestController
@@ -54,5 +59,11 @@ public class clzlszRController {
         clzlService.deleteCLZL(cldh);
         clzlslService.deleteclzlsz(cldh);
         return "success";
+    }
+
+    // 取得配方最新版次
+    @GetMapping("/clzlsz/getVersion/{cldh}")
+    public String getVersion(@PathVariable String cldh) {
+        return clzlService.getVersion(cldh);
     }
 }

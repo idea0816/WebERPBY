@@ -1,0 +1,390 @@
+<body>
+    <!--
+        /**
+        * @author CXY
+        * @version Create Time:2022年2月16日
+        * @Description 部位规格建立
+        *
+        */
+    -->
+    <div class="loadContent">
+        <section class="first30">
+            <br>部位规格建立<br><br>
+            <!-- <label for="lbChoice" class="left">类别</label> -->
+            <input id="lbChoice" list="lbList" type="text" class="" placeholder="类别资料" />
+            <datalist id="lbList">
+                <option>底模</option>
+                <option>大車</option>
+                <option>中底</option>
+                <option>合併部件</option>
+            </datalist>
+            <!-- <input id="getlbzls" type="button" value="查询" class="right"> -->
+            <br><br>
+            <div style="height: 400px; overflow:auto">
+                <table id="bwTable">
+                    <tr>
+                        <th style="width: 25%;">部位代号</th>
+                        <th>鞋厂部位名称</th>
+                    </tr>
+                    <tr th:each="getbwList: ${bwList}">
+                        <td th:text="${getbwList.getLbdh}">111</td>
+                        <td th:text="${getbwList.getZwsm}">111</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+        <!-- 右半頁內容 -->
+        <section class="second">
+            <div>
+                <br><br><br>
+                <div>
+                    <label for="textlbdh" class="left">部位代号</label>
+                    <input type="text" id="textlbdh" class="right" placeholder="">
+                </div>
+                <div id="96input" style="display: none;">
+                    <label for="mjChoice" class="left">模具资料</label>
+                    <input id="mjChoice" list="mjList" type="text" class="right" />
+                    <datalist id="mjList">
+                        <option th:each="getErpMj: ${erpMJList}" th:value="${getErpMj}" th:text="${getErpMj}"></option>
+                    </datalist>
+                    <label for="textColor" class="left">颜色</label>
+                    <input type="text" id="textColor" class="right">
+                </div>
+                <div id="97input" style="display: none;">
+                    <label for="mjChoice2" class="left">斬刀资料</label>
+                    <input id="mjChoice2" list="mjList" type="text" class="right" />
+                    <datalist id="mjList">
+                        <option th:each="getErpMj: ${erpMJList}" th:value="${getErpMj}" th:text="${getErpMj}"></option>
+                    </datalist>
+                    <label for="hwChoice" class="left">花輪资料</label>
+                    <input id="hwChoice" list="mjList" type="text" class="right" />
+                    <datalist id="mjList">
+                        <option th:each="getErpMj: ${erpMJList}" th:value="${getErpMj}" th:text="${getErpMj}"></option>
+                    </datalist>
+                    <label for="textWidth" class="left">寬度</label>
+                    <input type="text" id="textWidth" class="right">
+                    <label for="textThickness" class="left">厚度</label>
+                    <input type="text" id="textThickness" class="right">
+                    <label for="textColor2" class="left">颜色</label>
+                    <input type="text" id="textColor2" class="right">
+                </div>
+            </div>
+            <div id="bg1">
+                <input id="buttonAdd" type="button" value="修改">
+                <input id="buttonDel" type="button" value="删除">
+                <input id="buttonSave" type="button" value="存档">
+                <input id="buttonQuit" type="button" value="放弃">
+                <input id="search" type="text" placeholder="Type to search">
+            </div>
+            <div id="divMJ" style="height: 100px; overflow:auto">
+                <!-- 底模模具列表 -->
+                <table id="ListMJ" style="display: none;">
+                    <tr>
+                        <th>项次</th>
+                        <th>底模</th>
+                        <th>颜色</th>
+                        <th class="delCol" style="width:5%; display: none;"></th>
+                    </tr>
+                </table>
+                <br><br>
+                <!-- 大車模具列表 -->
+                <table id="ListDCMJ" style="display: none;">
+                    <tr>
+                        <th>项次</th>
+                        <th>斬刀</th>
+                        <th>花輪</th>
+                        <th>寬度</th>
+                        <th>厚度</th>
+                        <th>颜色</th>
+                        <th class="delCol" style="width:5%; display: none;"></th>
+                    </tr>
+                </table>
+            </div>
+            <br>
+            <div id="bwInput" style="display: none;">
+                <label for="textbwName" class="left">部位名稱</label>
+                <input type="text" id="textbwName" class="right">
+                <label for="textpf" class="left">標準配方</label>
+                <input id="rChoice" list="rList" type="text" class="right" />
+                <datalist id="rList">
+                    <!-- <option th:each="getAllR: ${getAllRList}" th:value="${getAllR.getCldh}+'*'+${getAllR.getCGLB}" -->
+                    <option th:each="getAllR: ${getAllRList}" th:value="${getAllR.getCldh}"
+                        th:text="${getAllR.getZwpm}">
+                    </option>
+                </datalist>
+            </div>
+            <br>
+            <div id="bg2" style="display: none;">
+                <!-- 第二組CRUD -->
+                <input id="buttonAdd2" type="button" value="修改">
+                <input id="buttonDel2" type="button" value="删除">
+                <input id="buttonSave2" type="button" value="存档">
+                <input id="buttonQuit2" type="button" value="放弃">
+            </div>
+            <br>
+            <div id="divBWPF">
+                <!-- 部位配方列表 -->
+                <table id="ListBWPF" style="display: none;">
+                    <tr>
+                        <th>部位名稱</th>
+                        <th>標準配方</th>
+                    </tr>
+                </table>
+
+            </div>
+            <br>
+            <div>
+                <!-- 96Size列表 Input Table -->
+                <table id="sizeInputTable" style="display: none;">
+                    <tr>
+                        <th>SIZE</th>
+                        <th>02</th>
+                        <th>02.5</th>
+                        <th>03</th>
+                        <th>03.5</th>
+                        <th>04</th>
+                        <th>04.5</th>
+                        <th>05</th>
+                        <th>05.5</th>
+                        <th>06</th>
+                        <th>06.5</th>
+                    </tr>
+                    <tr>
+                        <th>单重(G)</th>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                    </tr>
+                    <tr>
+                        <th>SIZE</th>
+                        <th>07</th>
+                        <th>07.5</th>
+                        <th>08</th>
+                        <th>08.5</th>
+                        <th>09</th>
+                        <th>09.5</th>
+                        <th>10</th>
+                        <th>10.5</th>
+                        <th>11</th>
+                        <th>11.5</th>
+                    </tr>
+                    <tr>
+                        <th>单重(G)</th>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                    </tr>
+                    <tr>
+                        <th>SIZE</th>
+                        <th>12</th>
+                        <th>12.5</th>
+                        <th>13</th>
+                        <th>13.5</th>
+                        <th>14</th>
+                        <th>14.5</th>
+                        <th>15</th>
+                        <th>15.5</th>
+                        <th>16</th>
+                        <th>16.5</th>
+                    </tr>
+                    <tr>
+                        <th>单重(G)</th>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                    </tr>
+                    <tr>
+                        <th>SIZE</th>
+                        <th>17</th>
+                        <th>17.5</th>
+                        <th>18</th>
+                        <th colspan="7"></th>
+                    </tr>
+                    <tr>
+                        <th>单重(G)</th>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                    </tr>
+                </table>
+            </div>
+            <br>
+            <div>
+                <!-- 97Size列表 Input Table -->
+                <table id="InputTable2" style="display: none;">
+                    <tr>
+                        <th>SIZE</th>
+                        <th>02</th>
+                        <th>02.5</th>
+                        <th>03</th>
+                        <th>03.5</th>
+                        <th>04</th>
+                        <th>04.5</th>
+                        <th>05</th>
+                        <th>05.5</th>
+                        <th>06</th>
+                        <th>06.5</th>
+                    </tr>
+                    <tr>
+                        <th>单重(G)</th>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                    </tr>
+                    <tr>
+                        <th>長度(CM)</th>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                    </tr>
+                    <tr>
+                        <th>SIZE</th>
+                        <th>07</th>
+                        <th>07.5</th>
+                        <th>08</th>
+                        <th>08.5</th>
+                        <th>09</th>
+                        <th>09.5</th>
+                        <th>10</th>
+                        <th>10.5</th>
+                        <th>11</th>
+                        <th>11.5</th>
+                    </tr>
+                    <tr>
+                        <th>单重(G)</th>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                    </tr>
+                    <tr>
+                        <th>長度(CM)</th>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                    </tr>
+                    <tr>
+                        <th>SIZE</th>
+                        <th>12</th>
+                        <th>12.5</th>
+                        <th>13</th>
+                        <th>13.5</th>
+                        <th>14</th>
+                        <th>14.5</th>
+                        <th>15</th>
+                        <th>15.5</th>
+                        <th>16</th>
+                        <th>16.5</th>
+                    </tr>
+                    <tr>
+                        <th>单重(G)</th>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                    </tr>
+                    <tr>
+                        <th>長度(CM)</th>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                    </tr>
+                    <tr>
+                        <th>SIZE</th>
+                        <th>17</th>
+                        <th>17.5</th>
+                        <th>18</th>
+                        <th colspan="7"></th>
+                    </tr>
+                    <tr>
+                        <th>单重(G)</th>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                    </tr>
+                    <tr>
+                        <th>長度(CM)</th>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                        <td><input type="text" style="width: 100%;"></td>
+                    </tr>
+                </table>
+            </div>
+            <div style="display: none;">
+                <!-- 第三組CRUD -->
+                <input id="buttonAdd3" type="button" value="修改">
+                <input id="buttonDel3" type="button" value="删除">
+                <input id="buttonSave3" type="button" value="存档">
+                <input id="buttonQuit3" type="button" value="放弃">
+            </div>
+            <textarea name="" id="" cols="15" rows="10" style="display: none;"></textarea>
+
+        </section>
+    </div>
+</body>
+<!-- 配合 Thymeleaf的寫法、從static位置後開始寫、連同靜態編輯一起引入 -->
+<script type="text/javascript" th:src="@{/js/jquery-3.6.0.min.js}" src="../static/js/jquery-3.6.0.min.js"></script>
+<script th:src="@{./js/bwBuild.js}" src="../static/js/bwBuild.js"></script>
+<!-- blockUI 每個分頁都要加入不然會出錯 -->
+<script type="text/javascript" th:src="@{/js/jquery.blockUI.js}" src="../static/js/jquery.blockUI.js"></script>

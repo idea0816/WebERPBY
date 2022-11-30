@@ -18,6 +18,7 @@ import java.util.Map;
  * @Description 配方组成資料(clzlsl & clzlsz 共用)
  * <p>
  * List<clzlsl> getclzlsl(String cldh); // Get Data of clzlsl
+ * void insertclzlsl(clzlsl clzlsl);    // Insert Data to clzlsl
  * List<clzlsl> getclzlsz(String cldh); // Get Data of clzlsz
  * void insertclzlsz(clzlsl clzlsl);    // Insert Data to clzlsz
  * void deleteclzlsz(String cldh);  // Delete clzlsz
@@ -46,6 +47,25 @@ public class clzlslDaoImpl implements clzlslDao {
         } else {
             return null;
         }
+    }
+
+    // Insert Data to clzlsl
+    @Override
+    public void insertclzlsl(clzlsl clzlsl) {
+        String sqlinsertclzlsl = "INSERT INTO clzlsl " +
+                "VALUES (:cldh, :lb, :cldhz, :clyl, :phr, :cldj, :USERID, :USERDATE, '')";
+        map = new HashMap<>();
+        map.put("cldh", clzlsl.getCldh());
+        map.put("lb", clzlsl.getLb());
+        map.put("cldhz", clzlsl.getCldhz());
+        map.put("clyl", clzlsl.getClyl());
+        map.put("phr", clzlsl.getPhr());
+        map.put("cldj", clzlsl.getCldj());
+        map.put("USERID", clzlsl.getUSERID());
+        map.put("USERDATE", clzlsl.getUSERDATE());
+
+        lbyddJdbcTemplate.update(sqlinsertclzlsl, map);
+
     }
 
     // Get Data of clzlsz
@@ -92,4 +112,5 @@ public class clzlslDaoImpl implements clzlslDao {
 
         lbyddJdbcTemplate.update(sqldeleteclzlsz, map);
     }
+
 }

@@ -1,0 +1,83 @@
+<body>
+    <!--
+        /**
+        * @author CXY
+        * @version Create Time:2022年5月19日
+        * @Description 订单鞋型合并
+        *
+        */
+    -->
+
+
+    <div>
+        <!-- 已合併製令單號 -->
+
+        <!-- 製令單列表 -->
+        <!-- <div>
+            <table id="zlzlTable">
+                <tr>
+                    <th>製令單號</th>
+                    <th>建檔日期</th>
+                </tr>
+        </div> -->
+
+
+        <!-- 右半頁內容 -->
+
+        <br><br>
+        <!-- 製令單明細 -->
+        <!-- <div>
+            <table id="zlzlTable">
+                <tr>
+                    <th>订单编号</th>
+                    <th>鞋型</th>
+                    <th>色号</th>
+                    <th>ARTICLE</th>
+                    <th>生产上线日</th>
+                    <th>鞋厂成型日</th>
+                    <th>双数</th>
+                </tr>
+        </div> -->
+
+
+    </div>
+
+    <div>
+        <br><br>
+        <input id="articleChoice" list="articleList" type="text" class="right" placeholder="ArticleList"
+            style="width: calc(100% / 3);" />
+        <!-- option 取得資料的寫法；getArticleList 是從後端傳來的資料 -->
+        <datalist id="articleList">
+            <option th:each="getArticle: ${getArticleList}" th:value="${getArticle}" th:text="${getArticle}">
+            </option>
+        </datalist>
+        <input type="button" id="getData" value="查詢">
+        <input type="button" id="showDD" value="所有訂單">
+
+        <!-- 訂單列表 -->
+        <div>
+            <table id="ddTable">
+                <tr>
+                    <th>订单编号</th>
+                    <th>鞋型</th>
+                    <th>色号</th>
+                    <th>ARTICLE</th>
+                    <th>生产上线日</th>
+                    <th>鞋厂成型日</th>
+                    <th>双数</th>
+                </tr>
+
+        </div>
+    </div>
+
+
+    <div id="down">
+
+    </div>
+
+</body>
+<!-- 配合 Thymeleaf的寫法、從static位置後開始寫、連同靜態編輯一起引入 -->
+<script type="text/javascript" th:src="@{/js/jquery-3.6.0.min.js}" src="../static/js/jquery-3.6.0.min.js"></script>
+<script th:src="@{./js/ZLZL.js}" src="../static/js/ZLZL.js"></script>
+<!-- blockUI 每個分頁都要加入不然會出錯 -->
+<script type="text/javascript" th:src="@{/js/jquery.blockUI.js}" src="../static/js/jquery.blockUI.js"></script>

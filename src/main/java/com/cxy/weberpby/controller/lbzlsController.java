@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 /**
  * @author CXY
  * @version Create Time: 2022/4/20
- * @Description 代号类别明细资料(頁面綁定)
+ * @Description 代号类别明细资料(頁面)
  * <p>
  * GetMapping("/lbzls") // 类别资料頁
  */

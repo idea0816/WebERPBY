@@ -1,0 +1,47 @@
+<body>
+  <!--
+        /**
+        * @author CXY
+        * @version Create Time:2022年2月16日
+        * @Description 前段进入点
+        *
+        */
+    -->
+
+  <nav>
+    <ul class="drop-down-menu">
+      <li>
+        <a id="" href="#">基本资料 &#8609;</a>
+        <ul>
+          <li><a id="lbzls" href="#">类别明细资料</a></li>
+          <li><a id="MJZLList" href="#">模具明细资料</a></li>
+          <li><a id="clzlsz" href="#">标准配方资料</a></li>
+        </ul>
+      </li>
+      <li>
+        <a id="" href="#">型体资料 &#8609;</a>
+        <ul>
+          <!-- <li><a id="bwList" href="#">部位明细资料</a></li> -->
+          <li><a id="bwBuild" href="#">部位规格建立</a></li>
+          <li><a id="XXZLList" href="#">型体部位對照</a></li>
+          <!-- <li><a id="clzlsl" href="#">配方明细资料</a></li> -->
+        </ul>
+      </li>
+      <li>
+        <a id="" href="#">領料庫存作業 &#8609;</a>
+        <ul>
+          <li><a id="LLZL" href="#">領&emsp;料作業</a></li>
+          <li><a id="" href="#">原物料庫存</a></li>
+          <li><a id="" href="#">胚&emsp;料庫存</a></li>
+          <li>
+            <a id="" href="http://localhost:3000" target="_blank"
+              >Test Outside</a
+            >
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+</body>
+<!-- 配合 Thymeleaf的寫法、從static位置後開始寫、連同靜態編輯一起引入 -->
+<script th:src="@{./js/front.js}" src="../static/js/front.js"></script>

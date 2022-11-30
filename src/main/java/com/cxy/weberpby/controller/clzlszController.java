@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 /**
  * @author CXY
  * @version Create Time: 2022/4/29
- * @Description 標準配方資料
+ * @Description 標準配方資料(頁面)
  *
  * public String clzlsz(Model model)    // 標準配方頁面  // Get 標準配方主资料   // 取得所有原物料 AW
  */

@@ -3,11 +3,10 @@ package com.cxy.weberpby.dao.impl;
 import com.cxy.weberpby.dao.CLZLDao;
 import com.cxy.weberpby.dto.CLZLQueryParams;
 import com.cxy.weberpby.mapper.CLZLRowMapper;
-import com.cxy.weberpby.mapper.clzlslRowMapper;
 import com.cxy.weberpby.model.CLZL;
-import com.cxy.weberpby.model.clzlsl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -21,11 +20,11 @@ import java.util.Map;
  * @Description 材料基本資料讀取
  * <p>
  * List<CLZL> getCLZL(CLZLQueryParams clzlQueryParams); // CLZL Data  // Get V(传回的值要考虑 NULL 的状态吗？) // Get A
- * List<clzlsl> getclzlsz(String cllb);    // Get clzlsz // 刪掉？
  * void insertCLZL(CLZL CLZL);  // 新增CLZL資料
  * void updateCLZL(CLZL CLZL);  // Update CLZL
  * void deleteCLZL(String cldh)    // Delete CLZL
  * List<CLZL> getOldDdCLZLa();  // 取得小于本月的底厂材料基本资料
+ * List<String> getVersion(String cldh)  // 取得配方最新版次
  */
 
 @Component
@@ -62,21 +61,6 @@ public class CLZLDaoImpl implements CLZLDao {
         } else {
             return null;
         }
-    }
-
-    // Get clzlsz
-    @Override
-    public List<clzlsl> getclzlsz(String cldh) {
-//        String sqlclzlsl = "SELECT cldh, lb, cldhz, clyl, phr, cldj, USERID, USERDATE " +
-//                "FROM clzlsz WHERE 1=1";
-//        map = new HashMap<>();
-//        List<clzlsl> list = lbyddJdbcTemplate.query(sqlclzlsl, map, new clzlslRowMapper());
-//        if (list.size() > 0) {
-//            return list;
-//        } else {
-//            return null;
-//        }
-        return null;
     }
 
     // 新增CLZL資料
@@ -149,4 +133,20 @@ public class CLZLDaoImpl implements CLZLDao {
         }
     }
 
+    // 取得配方最新版次
+    @Override
+    public List<String> getVersion(String cldh) {
+        String sqlgetVersion = "SELECT TOP 1 cldh " +
+                "FROM CLZL " +
+                "WHERE cldh LIKE :cldh " +
+                "ORDER BY cldh DESC ";
+        map = new HashMap<>();
+        map.put("cldh", cldh);
+
+        // 只查一个欄位資料的 RowMapper 寫法 // Lambda 寫法
+        RowMapper<String> rowMapper = (rs, rowNum) -> rs.getString("cldh");
+        List<String> getVersion = lbyddJdbcTemplate.query(sqlgetVersion, map, rowMapper);
+
+        return getVersion;
+    }
 }

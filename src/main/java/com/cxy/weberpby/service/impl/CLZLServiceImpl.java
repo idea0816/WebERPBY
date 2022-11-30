@@ -2,12 +2,10 @@ package com.cxy.weberpby.service.impl;
 
 import com.cxy.weberpby.dao.CLZLDao;
 import com.cxy.weberpby.dao.clzlslDao;
-import com.cxy.weberpby.dao.lbzlsDao;
 import com.cxy.weberpby.dto.CLZLQueryParams;
 import com.cxy.weberpby.dto.CLZLUpdateParams;
 import com.cxy.weberpby.model.CLZL;
 import com.cxy.weberpby.model.clzlsl;
-import com.cxy.weberpby.model.lbzls;
 import com.cxy.weberpby.service.CLZLService;
 import com.cxy.weberpby.service.timeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +24,7 @@ import java.util.Objects;
  * void updateCLZL(String cllb, CLZLUpdateParams cup);   // Update CLZL(配方有版次問題、所以多傳一個版次資料)// 這裡因為有需要 clzlsz & clzlsl 所以寫在一起、未來考慮分割(*)
  * void insertCLZL(String cllb, CLZLUpdateParams cup);   // Insert CLZL
  * void deleteCLZL(String cldh);    // Delete CLZL(配方有版次問題、所以多傳一個版次資料)
+ * String getVersion(String cldh)  // 取得配方最新版次
  */
 
 @Component
@@ -36,9 +35,6 @@ public class CLZLServiceImpl implements CLZLService {
 
     @Autowired
     private clzlslDao clzlslDao;
-
-    @Autowired
-    private lbzlsDao lbzlsDao;
 
     @Autowired
     private timeService timeservice;
@@ -68,16 +64,10 @@ public class CLZLServiceImpl implements CLZLService {
                     value.setCldh(cldh);
                     value.setCGLB(version);
                 }
-                // 取得06(配方類別)的所有明細
-                List<lbzls> lbzlsList = lbzlsDao.getlbzlsList("06");
-//                for (lbzls lbValue : lbzlsList) {
-                // 將類別代號換成類別名稱 // 還沒確定寫法
-//                    while (value.getCgcqdh() != null) {
-//                        if (value.getCgcqdh().equals(lbValue.getLbdh())) {
-//                            value.setCgcqdh(lbValue.getZwsm());
-//                        }
-//                    }
-//                }
+
+                // cldj四捨五入到小數點後2位
+                Double cldjRound = Double.valueOf(Math.round(value.getCldj() * 100) / 100.0);
+                value.setCldj(cldjRound);
             }
             return forVersion;
         } else {
@@ -147,6 +137,8 @@ public class CLZLServiceImpl implements CLZLService {
             insertclzlsz.setCldhz(value.getCldhz());
             insertclzlsz.setClyl(value.getClyl());
             insertclzlsz.setPhr((value.getClyl() / sumWclyl) * 100);
+            // 四捨五入到小數點後2位
+            // Double insCldj = Double.valueOf(Math.round((value.getCldj() * 100)/100.0 ));
             insertclzlsz.setCldj(value.getCldj());
             insertclzlsz.setUSERID("SUPER");
             insertclzlsz.setUSERDATE(timeservice.now());
@@ -278,6 +270,20 @@ public class CLZLServiceImpl implements CLZLService {
                 clzlDao.deleteCLZL(cldh);
             }
         }
+    }
 
+    // 取得配方最新版次
+    @Override
+    public String getVersion(String cldh) {
+        int getStar = cldh.indexOf("*"), newVersion = 0;
+        // 版本為000要多加一個判斷
+        if((cldh.substring(getStar+1, getStar+4)).equals("000")){
+            newVersion = 1;
+        } else {
+            List<String> oldcldh = clzlDao.getVersion(cldh.substring(0, getStar) + "%");
+            String oldversion = oldcldh.get(0).substring(getStar + 1, getStar + 4);
+            newVersion = Integer.parseInt(oldversion) + 1;
+        }
+        return String.format("%03d", newVersion);
     }
 }
