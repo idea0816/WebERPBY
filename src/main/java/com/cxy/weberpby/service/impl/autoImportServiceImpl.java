@@ -133,7 +133,11 @@ public class autoImportServiceImpl implements autoImportService {
                 String DdShehao = value.getSheHao();
 
                 for (int j = 0; j < getErpXSA.size(); j++) {
-                    if (getErpXSA.get(j).getXieXing().contains(DdXiexing) && getErpXSA.get(j).getSheHao().contains(DdShehao)) {
+                    // 5 : COB12SUC0003 , 01
+                    // 5 : COB12SUC0003 , 01Q
+                    // 為什麼要用contains???
+                    // if (getErpXSA.get(j).getXieXing().contains(DdXiexing) && getErpXSA.get(j).getSheHao().equals(DdShehao)) {
+                    if (getErpXSA.get(j).getXieXing().equals(DdXiexing) && getErpXSA.get(j).getSheHao().equals(DdShehao)) {
                         removeJ.add(j);
                     }
                 }
@@ -142,6 +146,7 @@ public class autoImportServiceImpl implements autoImportService {
             // ErpXiexing.remove // 這裡寫得很爛、找時間改寫成 JDK8 的 filter 用法
             int delX;
             for (int i = 0; i < removeJ.size(); i++) {
+//                System.out.println(removeJ.get(i) +" , "+ i );
                 delX = removeJ.get(i) - i;
                 getErpXSA.remove(delX);
             }
